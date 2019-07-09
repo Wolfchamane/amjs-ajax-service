@@ -214,14 +214,10 @@ class AmjsAjaxService extends AmjsDataTypesBase
         if (['POST', 'PUT', 'PATCH'].includes(this.method))
         {
             const model = this.getModel(this.body);
-            if (AmjsDataTypesBase.is('Object', model))
-            {
-                config.body = model.toJSON();
-            }
-            else
-            {
-                config.body = this.body;
-            }
+            config.body = AmjsDataTypesBase.is('Object', model)
+                ? model.toJSON()
+                : model || this.body;
+            this.$model = null;
         }
     }
 
@@ -238,7 +234,7 @@ class AmjsAjaxService extends AmjsDataTypesBase
             this._buildRequestConfig(config);
             const adapter = this.getAdapter();
             await adapter.serialize(config, this);
-            response = await fetch(this.$url.value, this.request);
+            response = await fetch(this.$url.value, this.$request);
         }
         catch (e)
         {
