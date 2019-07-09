@@ -1,6 +1,6 @@
 {
     "name": "@amjs/ajax-service",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": "Arturo Martínez <arturo.mart.diaz@gmail.com>",
     "description": "Handles AJAX requests",
     "keywords": [
