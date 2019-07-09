@@ -1,4 +1,4 @@
-# @amjs/ajax-service 0.1.0
+# @amjs/ajax-service 0.1.1
 
 ![Statements](https://img.shields.io/badge/Statements-100%25-brightgreen.svg) ![Branches](https://img.shields.io/badge/Branches-100%25-brightgreen.svg) ![Functions](https://img.shields.io/badge/Functions-100%25-brightgreen.svg) ![Lines](https://img.shields.io/badge/Lines-100%25-brightgreen.svg)
 
@@ -47,7 +47,7 @@ AmjsAjaxAdapterJSON.register('Adapter::https://swapi.co', SWApiAdapter);
 ```
 
 - Create your model:
-```
+```javascript
 //Pre-register required data types:
 require('@amjs/data-types/src/String');
 const { AmjsDataTypesObject } = require('@amjs/data-types');
