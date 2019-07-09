@@ -9,6 +9,11 @@
         "web",
         "ajax"
     ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Wolfchamane/amjs-ajax-service.git"
+    },
     "main": "src/Service.js",
     "dependencies": {
         "@amjs/ajax-adapter": "^0.1.2",
