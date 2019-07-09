@@ -1,0 +1,13 @@
+{
+    "extension": ["js"],
+    "exclude": ["tests/**/*.js", "node_modules"],
+    "include": ["src/**/*.js"],
+    "extends": "@istanbuljs/nyc-config-babel",
+    "reporter": ["html"],
+    "report-dir": "./coverage",
+    "branches": 100,
+    "lines": 100,
+    "functions": 100,
+    "statements": 100,
+    "check-coverage": true
+}

@@ -1,0 +1,16 @@
+{
+    "presets": [
+        [
+            "@babel/env",
+            {
+                "targets": {
+                    "node": true
+                }
+            }
+        ]
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-throw-expressions",
+        "istanbul"
+    ]
+}

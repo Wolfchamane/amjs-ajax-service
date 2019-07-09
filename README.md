@@ -1,0 +1,185 @@
+# @amjs/ajax-service 0.1.0
+
+![Statements](https://img.shields.io/badge/Statements-100%25-brightgreen.svg) ![Branches](https://img.shields.io/badge/Branches-100%25-brightgreen.svg) ![Functions](https://img.shields.io/badge/Functions-100%25-brightgreen.svg) ![Lines](https://img.shields.io/badge/Lines-100%25-brightgreen.svg)
+
+> Handles AJAX requests
+
+## Installation
+
+```bash
+$ npm i @amjs/ajax-service
+```
+## Usage
+
+Install following dependencies:
+```bash
+$ npm i --save @amjs/data-types @amjs/ajax-adapter
+```
+
+- Create your API Adapter:
+```javascript
+const { AmjsAjaxAdapterJSON } = require('@amjs/ajax-adapter');
+
+class SWApiAdapter extends AmjsAjaxAdapterJSON
+{
+    serialize(request, service)
+    {
+        // ie.: add authorization header to request configuration headers (if your API requires auth. token)
+        // request.headers = request.headers || {};
+        // request.headers['Authorization'] = `Bearer ${this.constructor.token}`;
+        // ...
+
+        super.serialize(request, service);
+    }
+
+    async unserialize(response, service)
+    {
+        // ie.: recover authorization response header value from response object
+        // this.constructor.token = response.headers.get('Authorization');
+        // ...
+
+        return await super.unserialize(response, service);
+    }
+}
+
+// Register your API adapter for an specific domain
+AmjsAjaxAdapterJSON.register('Adapter::https://swapi.co', SWApiAdapter);
+```
+
+- Create your model:
+```
+//Pre-register required data types:
+require('@amjs/data-types/src/String');
+const { AmjsDataTypesObject } = require('@amjs/data-types');
+
+class SWApiPeople extends AmjsDataTypesObject
+{
+    constructor(values)
+    {
+        super();
+
+        // Declare this model properties
+        this.name = null;
+        this.height = null;
+        this.mass = null;
+        this['hair_color'] = null;
+        this['skin_color'] = null;
+        this['eye_color'] = null;
+        this['birth_year'] = null;
+        this.gender = null;
+        this.homeworld = null;
+        this.films = null;
+        this.species = null;
+        this.vehicles = null;
+        this.starships = null;
+        this.created = null;
+        this.edited = null;
+        this.url = null;
+
+        /**
+         * @override
+         */
+        this.$propertyTypes = {
+            name: 'String',
+            height: 'String',
+            mass: 'String',
+            'hair_color': 'String,
+            'skin_color': 'String,
+            'eye_color': 'String,
+            'birth_year': 'String,
+            gender: 'String',
+            homeworld: 'String',
+            films: '*',
+            species: '*',
+            vehicles: '*',
+            starships: '*',
+            created: 'String',
+            edited: 'String',
+            url: 'String'
+        }
+
+        this._setProperties(values);
+    }
+}
+
+// Register the class name, would be use later within your service
+AmjsDataTypesObject.register('SWApiPeople', SWApiPeople);
+```
+
+- Create your service
+```javascript
+require('./sw-api-people'); // Pre-register model
+const AmjsAjaxService = require('@amjs/ajax-service');
+
+class SWApiPeopleService extends AmjsAjaxService
+{
+    /**
+     * @inheritDoc
+     */
+    constructor()
+    {
+        super({
+            host : 'https://swapi.co', // must equals adapter registration
+            path : '/api/people/{id}'
+        });
+
+        this.$allowedMethods = ['GET'];
+    }
+
+    /**
+     * @override
+     */
+    _getModel(method = 'GET')
+    {
+        let model;
+        switch (method)
+        {
+            case 'GET':
+            default:
+                model = 'SWApiPeople'; // this is the name you pre-register your model
+                break;
+        }
+
+        return model;
+    }
+}
+
+const srv = new SWApiPeopleService();
+srv.params = {
+    id : 1
+};
+const response = await srv.doRequest();
+console.log(response.toJSON());
+/**
+name         : 'Luke Skywalker',
+height       : '172',
+mass         : '77',
+'hair_color' : 'blond',
+'skin_color' : 'fair',
+'eye_color'  : 'blue',
+'birth_year' : '19BBY',
+gender       : 'male',
+homeworld    : 'https://swapi.co/api/planets/1/',
+films        : [
+'https://swapi.co/api/films/2/',
+'https://swapi.co/api/films/6/',
+'https://swapi.co/api/films/3/',
+'https://swapi.co/api/films/1/',
+'https://swapi.co/api/films/7/'
+],
+species : [
+'https://swapi.co/api/species/1/'
+],
+vehicles : [
+'https://swapi.co/api/vehicles/14/',
+'https://swapi.co/api/vehicles/30/'
+],
+starships : [
+'https://swapi.co/api/starships/12/',
+'https://swapi.co/api/starships/22/'
+],
+created : '2014-12-09T13:50:51.644000Z',
+edited  : '2014-12-20T21:17:56.891000Z',
+url     : 'https://swapi.co/api/people/1/'
+*/
+```
