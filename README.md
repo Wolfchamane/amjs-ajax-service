@@ -1,4 +1,4 @@
-# @amjs/ajax-service 0.1.1
+# @amjs/ajax-service 0.1.2
 
 ![Statements](https://img.shields.io/badge/Statements-100%25-brightgreen.svg) ![Branches](https://img.shields.io/badge/Branches-100%25-brightgreen.svg) ![Functions](https://img.shields.io/badge/Functions-100%25-brightgreen.svg) ![Lines](https://img.shields.io/badge/Lines-100%25-brightgreen.svg)
 
