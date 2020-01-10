@@ -1,6 +1,6 @@
 {
     "name": "@amjs/ajax-service",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "author": "Arturo Martínez <arturo.mart.diaz@gmail.com>",
     "description": "Handles AJAX requests",
     "keywords": [
@@ -17,24 +17,24 @@
     "main": "src/Service.js",
     "dependencies": {
         "@amjs/ajax-adapter": "^0.1.2",
-        "@amjs/ajax-url": "^0.1.1",
-        "@amjs/data-types": "^0.1.3",
-        "@amjs/factory": "^0.2.7"
+        "@amjs/ajax-url": "^0.1.3",
+        "@amjs/data-types": "^0.1.4",
+        "@amjs/factory": "^0.2.8"
     },
     "devDependencies": {
-        "@amjs/create-readme": "^0.1.0",
-        "@babel/core": "^7.6.0",
-        "@babel/plugin-proposal-throw-expressions": "^7.2.0",
-        "@babel/preset-env": "^7.6.0",
-        "@babel/register": "^7.6.0",
+        "@amjs/create-readme": "^0.1.2",
+        "@babel/core": "^7.7.7",
+        "@babel/plugin-proposal-throw-expressions": "^7.7.4",
+        "@babel/preset-env": "^7.7.7",
+        "@babel/register": "^7.7.7",
         "@istanbuljs/nyc-config-babel": "^2.1.1",
         "babel-eslint": "^10.0.3",
         "babel-plugin-istanbul": "^5.2.0",
-        "eslint": "^6.3.0",
-        "lint-staged": "^9.2.5",
+        "eslint": "^6.8.0",
+        "lint-staged": "^9.5.0",
         "node-fetch": "^2.6.0",
         "nyc": "^14.1.1",
-        "prettier": "^1.18.2"
+        "prettier": "^1.19.1"
     },
     "scripts": {
         "format": "prettier --config .prettierrc --write 'src/**/*.m?js'",
