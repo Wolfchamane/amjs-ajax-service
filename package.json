@@ -1,6 +1,6 @@
 {
     "name": "@amjs/ajax-service",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "author": "Arturo Martínez <arturo.mart.diaz@gmail.com>",
     "description": "Handles AJAX requests",
     "keywords": [
@@ -23,12 +23,12 @@
     },
     "devDependencies": {
         "@amjs/create-readme": "^0.1.2",
-        "@babel/core": "^7.7.7",
-        "@babel/plugin-proposal-throw-expressions": "^7.7.4",
-        "@babel/preset-env": "^7.7.7",
-        "@babel/register": "^7.7.7",
+        "@babel/core": "^7.8.7",
+        "@babel/plugin-proposal-throw-expressions": "^7.8.3",
+        "@babel/preset-env": "^7.8.7",
+        "@babel/register": "^7.8.6",
         "@istanbuljs/nyc-config-babel": "^2.1.1",
-        "babel-eslint": "^10.0.3",
+        "babel-eslint": "^10.1.0",
         "babel-plugin-istanbul": "^5.2.0",
         "eslint": "^6.8.0",
         "lint-staged": "^9.5.0",

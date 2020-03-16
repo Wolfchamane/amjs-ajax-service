@@ -1,6 +1,4 @@
-# @amjs/ajax-service 0.1.4
-
-
+# @amjs/ajax-service 0.1.5
 
 > Handles AJAX requests
 
