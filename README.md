@@ -1,4 +1,4 @@
-# @amjs/ajax-service 0.1.6
+# @amjs/ajax-service 0.1.7
 
 ![Statements](https://img.shields.io/badge/Statements-100%25-brightgreen.svg) ![Branches](https://img.shields.io/badge/Branches-100%25-brightgreen.svg) ![Functions](https://img.shields.io/badge/Functions-100%25-brightgreen.svg) ![Lines](https://img.shields.io/badge/Lines-100%25-brightgreen.svg)
 
@@ -43,7 +43,7 @@ class SWApiAdapter extends AmjsAjaxAdapterJSON
 }
 
 // Register your API adapter for an specific domain
-AmjsAjaxAdapterJSON.register('Adapter::https://swapi.co', SWApiAdapter);
+AmjsAjaxAdapterJSON.register('Adapter::https://swapi.dev', SWApiAdapter);
 ```
 
 - Create your model:
@@ -119,7 +119,7 @@ class SWApiPeopleService extends AmjsAjaxService
     constructor()
     {
         super({
-            host : 'https://swapi.co', // must equals adapter registration
+            host : 'https://swapi.dev', // must equals adapter registration
             path : '/api/people/{id}'
         });
 
@@ -159,27 +159,27 @@ mass         : '77',
 'eye_color'  : 'blue',
 'birth_year' : '19BBY',
 gender       : 'male',
-homeworld    : 'https://swapi.co/api/planets/1/',
+homeworld    : 'https://swapi.dev/api/planets/1/',
 films        : [
-'https://swapi.co/api/films/2/',
-'https://swapi.co/api/films/6/',
-'https://swapi.co/api/films/3/',
-'https://swapi.co/api/films/1/',
-'https://swapi.co/api/films/7/'
+'https://swapi.dev/api/films/2/',
+'https://swapi.dev/api/films/6/',
+'https://swapi.dev/api/films/3/',
+'https://swapi.dev/api/films/1/',
+'https://swapi.dev/api/films/7/'
 ],
 species : [
-'https://swapi.co/api/species/1/'
+'https://swapi.dev/api/species/1/'
 ],
 vehicles : [
-'https://swapi.co/api/vehicles/14/',
-'https://swapi.co/api/vehicles/30/'
+'https://swapi.dev/api/vehicles/14/',
+'https://swapi.dev/api/vehicles/30/'
 ],
 starships : [
-'https://swapi.co/api/starships/12/',
-'https://swapi.co/api/starships/22/'
+'https://swapi.dev/api/starships/12/',
+'https://swapi.dev/api/starships/22/'
 ],
 created : '2014-12-09T13:50:51.644000Z',
 edited  : '2014-12-20T21:17:56.891000Z',
-url     : 'https://swapi.co/api/people/1/'
+url     : 'https://swapi.dev/api/people/1/'
 */
 ```
