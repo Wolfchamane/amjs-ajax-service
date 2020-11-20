@@ -24,10 +24,19 @@ class AmjsAjaxService extends AmjsDataTypesBase
             'adapter',
             'allowedMethods',
             'model',
+            'raw',
             'request',
             'response',
             'url'
         ]);
+
+        /**
+         * Flags if debug info is prompted into console
+         * @property    debug
+         * @type        {Boolean}
+         * @default     false
+         */
+        this.debug      = false;
 
         /**
          * Request domain to query
@@ -142,6 +151,31 @@ class AmjsAjaxService extends AmjsDataTypesBase
     }
 
     /**
+     * Logs info into console system
+     * @param   {String}    type    'group | time | error | log | info | warn' kind of message
+     * @param   {String}    message To be logged
+     * @param   {*}         args    Remaining arguments
+     * @private
+     */
+    _log(type = 'log', message = '', ...args)
+    {
+        if ([
+            'group',
+            'groupCollapsed',
+            'groupEnd',
+            'time',
+            'timeEnd',
+            'error',
+            'log',
+            'info',
+            'warn'
+        ].includes(type) && this.debug)
+        {
+            console[type](message, ...args);
+        }
+    }
+
+    /**
      * Callback executed after fetching service endpoint
      * @param   {*} response    Response obtained from service
      * @private
@@ -227,6 +261,8 @@ class AmjsAjaxService extends AmjsDataTypesBase
      */
     async doRequest()
     {
+        const trace = [`Request: %c${this.path}%c`, 'font-weight: 600', 'font-weight: 400'];
+        this._log('groupCollapsed', ...trace);
         let response;
         try
         {
@@ -234,14 +270,21 @@ class AmjsAjaxService extends AmjsDataTypesBase
             this._buildRequestConfig(config);
             const adapter = this.getAdapter();
             await adapter.serialize(config, this);
+            this._log('log', `[%c${config.method}%c] ${this.$url}`, 'font-weight: 600', 'font-weight: 400');
+            this._log('log', `Headers: ${JSON.stringify(config.headers)}`);
+            this._log('time', 'Time');
             response = await fetch(this.$url.value, this.$request);
+            this._log('timeEnd', 'Time');
         }
         catch (e)
         {
+            this._log('error', '%ERROR%c: %o', e, 'font-weight: 600; color: red', 'font-weight: 400; color: black');
             response = e;
         }
 
         response = await this._onRequestEnd(response);
+        this._log('log', `Response: %o`, response);
+        this._log('groupEnd', ...trace);
 
         return response;
     }

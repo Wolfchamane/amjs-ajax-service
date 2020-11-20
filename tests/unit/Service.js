@@ -47,6 +47,24 @@ AmjsFactory.register('MockModel', MockModel);
     equal(sut instanceof AmjsAjaxService, true, 'AmjsAjaxService is registered as "AjaxService"');
 })();
 
+(function()
+{
+    const sut = new MockService();
+    let isCalled = false;
+    const copy = console.log;
+    console.log = () => isCalled = true;
+    sut._log();
+    equal(isCalled, false, true, 'By default, does nothing');
+    sut._log('log', 'Test');
+    equal(isCalled, false, true, 'If debug is not enabled, does not logs any info');
+    sut.debug = true;
+    sut._log('foo', 'Test');
+    equal(isCalled, false, true, 'If log type is not valid, does not logs any info');
+    sut._log('log', 'Test');
+    equal(isCalled, true, true, 'In other case, produces the log output');
+    console.log = copy;
+})();
+
 (async function ()
 {
     try
@@ -119,6 +137,7 @@ AmjsFactory.register('MockModel', MockModel);
     const sut = new AmjsAjaxService({
         host,
         path    : '/api/people/{id}',
+        debug   : true,
         params  : {
             id  : 1
         }
